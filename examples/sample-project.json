@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "masterResume": {
+    "id": "10000000-0000-4000-8000-000000000001",
+    "name": "Synthetic master resume",
+    "content": "Education: Example State University.\nProject: Built a class sales dashboard with Python and SQL.",
+    "updatedAt": "2026-11-01T12:00:00Z"
+  },
+  "jobApplications": [
+    {
+      "id": "20000000-0000-4000-8000-000000000001",
+      "company": "Example Analytics Co.",
+      "title": "Junior Data Analyst",
+      "description": "Seeking a candidate with Python, SQL, and dashboard project experience.",
+      "jobURL": null,
+      "status": "Interested",
+      "notes": "Synthetic example only.",
+      "createdAt": "2026-11-01T12:05:00Z",
+      "updatedAt": "2026-11-01T12:05:00Z"
+    }
+  ],
+  "suggestions": [
+    {
+      "id": "30000000-0000-4000-8000-000000000001",
+      "applicationID": "20000000-0000-4000-8000-000000000001",
+      "sourceResumeID": "10000000-0000-4000-8000-000000000001",
+      "sourceResumeContent": "Education: Example State University.\nProject: Built a class sales dashboard with Python and SQL.",
+      "sourceResumeUpdatedAt": "2026-11-01T12:00:00Z",
+      "sourceText": "Built a class sales dashboard with Python and SQL.",
+      "proposedText": "Built a sales dashboard for a class project using Python and SQL.",
+      "rationale": "This wording brings the job's requested tools forward without adding new experience.",
+      "decision": "Accepted"
+    }
+  ],
+  "tailoredResumes": [
+    {
+      "id": "40000000-0000-4000-8000-000000000001",
+      "applicationID": "20000000-0000-4000-8000-000000000001",
+      "sourceResumeID": "10000000-0000-4000-8000-000000000001",
+      "sourceResumeContent": "Education: Example State University.\nProject: Built a class sales dashboard with Python and SQL.",
+      "sourceResumeUpdatedAt": "2026-11-01T12:00:00Z",
+      "content": "Education: Example State University.\nProject: Built a sales dashboard for a class project using Python and SQL.",
+      "acceptedSuggestionIDs": ["30000000-0000-4000-8000-000000000001"],
+      "savedAt": "2026-11-01T12:10:00Z"
+    }
+  ]
+}

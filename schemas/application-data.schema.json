@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/resume-tracker/application-data.schema.json",
+  "title": "Resume Tracker project data",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "masterResume", "jobApplications", "suggestions", "tailoredResumes"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "masterResume": { "anyOf": [{ "$ref": "#/$defs/resume" }, { "type": "null" }] },
+    "jobApplications": { "type": "array", "items": { "$ref": "#/$defs/jobApplication" } },
+    "suggestions": { "type": "array", "items": { "$ref": "#/$defs/suggestion" } },
+    "tailoredResumes": { "type": "array", "items": { "$ref": "#/$defs/tailoredResume" } }
+  },
+  "$defs": {
+    "uuid": { "type": "string", "format": "uuid" },
+    "dateTime": { "type": "string", "format": "date-time" },
+    "nonBlankString": { "type": "string", "minLength": 1, "pattern": "\\S" },
+    "jobApplication": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "company", "title", "description", "jobURL", "status", "notes", "createdAt", "updatedAt"],
+      "properties": {
+        "id": { "$ref": "#/$defs/uuid" },
+        "company": { "$ref": "#/$defs/nonBlankString" },
+        "title": { "$ref": "#/$defs/nonBlankString" },
+        "description": { "$ref": "#/$defs/nonBlankString" },
+        "jobURL": { "type": ["string", "null"], "format": "uri" },
+        "status": { "enum": ["Interested", "Applied", "Interviewing", "Offer", "Closed"] },
+        "notes": { "type": ["string", "null"] },
+        "createdAt": { "$ref": "#/$defs/dateTime" },
+        "updatedAt": { "$ref": "#/$defs/dateTime" }
+      }
+    },
+    "resume": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "content", "updatedAt"],
+      "properties": {
+        "id": { "$ref": "#/$defs/uuid" },
+        "name": { "$ref": "#/$defs/nonBlankString" },
+        "content": { "type": "string" },
+        "updatedAt": { "$ref": "#/$defs/dateTime" }
+      }
+    },
+    "suggestion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "applicationID", "sourceResumeID", "sourceResumeContent", "sourceResumeUpdatedAt", "sourceText", "proposedText", "rationale", "decision"],
+      "properties": {
+        "id": { "$ref": "#/$defs/uuid" },
+        "applicationID": { "$ref": "#/$defs/uuid" },
+        "sourceResumeID": { "$ref": "#/$defs/uuid" },
+        "sourceResumeContent": { "type": "string" },
+        "sourceResumeUpdatedAt": { "$ref": "#/$defs/dateTime" },
+        "sourceText": { "$ref": "#/$defs/nonBlankString" },
+        "proposedText": { "$ref": "#/$defs/nonBlankString" },
+        "rationale": { "$ref": "#/$defs/nonBlankString" },
+        "decision": { "enum": ["Pending", "Accepted", "Rejected"] }
+      }
+    },
+    "tailoredResume": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "applicationID", "sourceResumeID", "sourceResumeContent", "sourceResumeUpdatedAt", "content", "acceptedSuggestionIDs", "savedAt"],
+      "properties": {
+        "id": { "$ref": "#/$defs/uuid" },
+        "applicationID": { "$ref": "#/$defs/uuid" },
+        "sourceResumeID": { "$ref": "#/$defs/uuid" },
+        "sourceResumeContent": { "type": "string" },
+        "sourceResumeUpdatedAt": { "$ref": "#/$defs/dateTime" },
+        "content": { "type": "string" },
+        "acceptedSuggestionIDs": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/uuid" } },
+        "savedAt": { "$ref": "#/$defs/dateTime" }
+      }
+    }
+  }
+}
